@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Swag Labs Automation — Project Documentation</title>
+  <style>
+    :root { --primary:#0b5fff; --text:#1b1f24; --muted:#4b5563; --bg:#ffffff; --border:#e5e7eb; }
+    * { box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; line-height: 1.6; margin: 0; background: var(--bg); color: var(--text); }
+    header { padding: 32px 20px; background: linear-gradient(180deg, rgba(11,95,255,0.08), transparent); border-bottom: 1px solid var(--border); }
+    .container { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+    h1 { font-size: 32px; margin: 0 0 8px; }
+    .meta { color: var(--muted); }
+    section { padding: 24px 0; border-bottom: 1px solid var(--border); }
+    h2 { font-size: 22px; margin-top: 0; color: var(--primary); }
+    code, pre { background: #0f172a0d; border: 1px solid var(--border); border-radius: 6px; }
+    code { padding: 0 6px; }
+    pre { padding: 12px; overflow: auto; }
+    ul { margin: 0; padding-left: 22px; }
+    .callout { background: #f8fafc; border-left: 4px solid var(--primary); padding: 12px 14px; margin: 12px 0; }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    footer { padding: 20px; color: var(--muted); font-size: 14px; }
+    @media print {
+      header { background: none; border: none; }
+      section { break-inside: avoid; }
+      a { color: inherit; text-decoration: underline; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Swag Labs Automation — Project Documentation</h1>
+      <div class="meta">Version 1.0 · Date: 2025-09-19</div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h2>1) Summary and Objectives</h2>
+      <p>This repository contains an end-to-end UI test automation framework for the Swag Labs web application, built with Selenium WebDriver, TestNG, and the Page Object Model (POM). The project emphasizes maintainability, readability, and CI-readiness, using Allure for rich reporting and a configurable driver setup for cross‑browser testing.</p>
+      <p><strong>Primary objectives:</strong></p>
+      <ul>
+        <li>Validate core user journeys: login, product sorting, add-to-cart, checkout, and logout.</li>
+        <li>Provide a scalable test architecture with reusable page components and utilities.</li>
+        <li>Produce actionable test reports with screenshots through Allure.</li>
+        <li>Enable reliable execution locally and on CI.</li>
+      </ul>
+      <div class="callout">
+        <strong>Repository link(s):</strong>
+        <ul>
+          <li>Main project: <a href="#">ADD_YOUR_GITHUB_REPO_URL_HERE</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>2) Thought Process</h2>
+      <ul>
+        <li>Separation of concerns via POM to isolate UI locators and flows from test logic.</li>
+        <li>A thin BasePage for synchronized interactions (waits/clicks/inputs) and shared helpers.</li>
+        <li>Centralized driver lifecycle management to avoid flakiness and to simplify suite setup/teardown.</li>
+        <li>Test data decoupled from test logic to support reuse and easy changes.</li>
+        <li>Deterministic runs in CI using headless browser modes and predictable timeouts.</li>
+        <li>Report-first mindset: integrate Allure early so that failures are diagnosable with screenshots and steps.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>3) Approach and Methodology</h2>
+      <ul>
+        <li><strong>Test Design:</strong>
+          <ul>
+            <li>Scenario-based TestNG tests per workflow: Login, Add to Cart, Checkout, Product Sorting, and Logout.</li>
+            <li>Soft assertions where appropriate to aggregate verifications without aborting early.</li>
+          </ul>
+        </li>
+        <li><strong>Architecture:</strong>
+          <ul>
+            <li>Page Object Model (POM) classes in <code>src/test/java/pages</code> encapsulate locators and behaviors.</li>
+            <li><code>BasePage</code> provides synchronized actions (explicit waits, safe clicks, inputs, dropdown selects) and Allure attachments.</li>
+            <li><code>PageFactory</code> holds a shared WebDriverWait and initializes page elements.</li>
+            <li><code>utilities</code> contain driver management and config readers.</li>
+          </ul>
+        </li>
+        <li><strong>Environment &amp; Config:</strong>
+          <ul>
+            <li><code>config.properties</code> drives base URL and browser selection.</li>
+            <li><code>DriverManager</code> supports Chrome (headless by default for CI), Firefox (headless), Edge, and Safari.</li>
+            <li>Implicit and explicit waits are used judiciously (10s defaults) to reduce flakiness.</li>
+          </ul>
+        </li>
+        <li><strong>Reporting:</strong> Allure annotations (@Step, @Attachment) and automatic screenshots for richer context.</li>
+        <li><strong>CI/CD:</strong> Project is structured to be GitHub Actions–friendly. Tests can run headless on push to main. Allure results live under <code>allure-results/</code> and <code>target/allure-results/</code>.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>4) Steps Taken to Complete the Tasks</h2>
+      <ol>
+        <li>Established project skeleton with Maven, Selenium, TestNG, and Allure dependencies (<code>pom.xml</code>).</li>
+        <li>Implemented core pages using POM:
+          <ul>
+            <li><code>LoginPage</code>, <code>ProductsPage</code>, <code>CartPage</code>, <code>CheckoutPage</code>, and shared <code>CommonElements</code>.</li>
+          </ul>
+        </li>
+        <li>Built <code>BasePage</code> utilities:
+          <ul>
+            <li>Safe clicking, text input with visibility checks, dropdown selecting, visibility verifications, and Allure screenshot attachments.</li>
+          </ul>
+        </li>
+        <li>Added <code>PageFactory</code> to initialize elements and provide a shared <code>WebDriverWait</code>.</li>
+        <li>Implemented <code>DriverManager</code> to centralize browser setup/teardown with CI-friendly headless options and implicit wait/maximize.</li>
+        <li>Created TestNG test cases for each workflow in <code>src/test/java/testCases</code>:
+          <ul>
+            <li><code>LoginTestCase</code>, <code>AddToCartTestCase</code>, <code>ProductSortingTestCase</code>, <code>CheckoutTestCase</code>, <code>LogOutTestCase</code>.</li>
+          </ul>
+        </li>
+        <li>Set up configuration management via <code>utilities.configProperties</code> and <code>src/test/resources/config.properties</code>.</li>
+        <li>Wired Allure reporting and attached screenshots on demand via <code>BasePage.takeScreenshot</code>.</li>
+        <li>Added TestNG suite configuration (<code>src/test/resources/testNg.xml</code>) to orchestrate test runs and selective execution.</li>
+        <li>Verified local and CI runs, producing <code>target/surefire-reports</code> and Allure results artifacts.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>5) Final Achievements</h2>
+      <ul>
+        <li>Stable, maintainable Selenium + TestNG test suite for key Swag Labs scenarios.</li>
+        <li>Reusable POM abstraction with synchronized interactions to minimize flaky tests.</li>
+        <li>Headless execution paths suitable for CI.</li>
+        <li>Allure enriched reporting with steps and screenshots.</li>
+        <li>Structured test data management for login and checkout.</li>
+        <li>Clear suite configuration (TestNG XML) for targeted runs and grouping.</li>
+      </ul>
+      <p><strong>Artifacts present in repo:</strong> <code>allure-results/</code>, <code>target/surefire-reports/</code>, and <code>assets/</code>.</p>
+    </section>
+
+    <section>
+      <h2>6) How to Run the Suite</h2>
+      <ul>
+        <li>Pre-requisites: JDK 20+, Maven, a modern browser. Allure CLI optional for report serving.</li>
+        <li>Run entire suite: <code>mvn clean test</code></li>
+        <li>Serve Allure report (if CLI installed): <code>allure serve allure-results</code></li>
+        <li>Target specific tests: edit <code>src/test/resources/testNg.xml</code> classes section.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>7) Export to PDF</h2>
+      <ol>
+        <li>Open this HTML file in your browser.</li>
+        <li>Press Ctrl+P (Cmd+P on macOS) and choose <em>Save as PDF</em>.</li>
+        <li>Save as <code>Project-Documentation.pdf</code>.</li>
+      </ol>
+      <p>Alternatively, with Pandoc installed: <code>pandoc docs/Project-Documentation.md -o docs/Project-Documentation.pdf</code></p>
+    </section>
+
+    <section>
+      <h2>8) Repository Links</h2>
+      <ul>
+        <li>Swag Labs Automation (this project): <a href="#">ADD_YOUR_GITHUB_REPO_URL_HERE</a></li>
+      </ul>
+      <p>If you have multiple related projects, list them here with their GitHub URLs.</p>
+    </section>
+
+    <section>
+      <h2>9) Key Files</h2>
+      <ul>
+        <li><code>src/test/java/pages/BasePage.java</code> — shared UI actions, waits, and Allure support.</li>
+        <li><code>src/test/java/pages/PageFactory.java</code> — element initialization and shared wait.</li>
+        <li><code>src/test/java/pages/*.java</code> — POM classes per application page.</li>
+        <li><code>src/test/java/testCases/*.java</code> — TestNG workflow tests.</li>
+        <li><code>src/test/java/utilities/DriverManager.java</code> — WebDriver initialization/teardown.</li>
+        <li><code>src/test/java/utilities/configProperties.java</code> — config reader and environment writer.</li>
+        <li><code>src/test/resources/testNg.xml</code> — suite definition.</li>
+        <li><code>src/test/resources/config.properties</code> — base URL, browser, and other settings.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="container">
+    © 2025 Swag Labs Automation — Documentation. Print this page to save as PDF.
+  </footer>
+</body>
+</html>

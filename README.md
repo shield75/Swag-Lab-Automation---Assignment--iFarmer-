@@ -5,6 +5,13 @@ Swag Labs Automation is a Selenium and TestNG-based automation testing framework
 
 ---
 
+## Documentation
+- Full project documentation (Markdown): `docs/Project-Documentation.md`
+- Printable documentation (HTML → Save as PDF): `docs/Project-Documentation.html`
+  - To export as PDF: open the HTML in a browser, press Ctrl+P (Cmd+P on macOS), choose "Save as PDF".
+
+---
+
 ## **Features**
 - Fully automated testing for the Swag Labs web application's critical functionalities.
 - Supports detailed **TestNG** test cases and scenarios.
