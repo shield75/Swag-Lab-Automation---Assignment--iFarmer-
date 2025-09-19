@@ -32,7 +32,7 @@ public class DriverManager {
                     break;
                 case "firefox":
                     FirefoxOptions firefoxOptions = new FirefoxOptions();
-                    firefoxOptions.addArguments("-headless");  // Headless mode
+                    //firefoxOptions.addArguments("-headless");  // Headless mode
                     // Additional Firefox options for CI can be added here if needed
                     driver = new FirefoxDriver(firefoxOptions);
                     break;
