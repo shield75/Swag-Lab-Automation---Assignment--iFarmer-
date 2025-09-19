@@ -15,7 +15,7 @@ Primary objectives:
 - Enable reliable execution locally and on CI.
 
 Repository link(s):
-- Main project: [ADD_YOUR_GITHUB_REPO_URL_HERE]
+- Main project: [https://github.com/shield75/Swag-Lab-Automation-Assignment-iFarmer.git]
 
 ---
 
