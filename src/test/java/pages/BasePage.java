@@ -1,8 +1,9 @@
 package pages;
 
+import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
+import org.openqa.selenium.*;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -88,4 +89,20 @@ public class BasePage {
             return false;
         }
     }
+
+    /**
+     * Takes a screenshot and attaches it to the Allure report
+     * @param name Name of the screenshot to be displayed in the report
+     * @return byte[] Returns the screenshot as a byte array
+     */
+    @Attachment(value = "{name}", type = "image/png")
+    public static byte[] takeScreenshot(String name) {
+        try {
+            return ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

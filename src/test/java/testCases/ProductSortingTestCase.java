@@ -77,21 +77,25 @@ public class ProductSortingTestCase extends BasePage {
                 clickAndSelectOption(pp.sortSelect, option);
                 Thread.sleep(5000);
                 pp.assertSortedPrices(ce.productPrices, true);
+                takeScreenshot("Product sorting > Low to High");
             }
             case optionHighToLow -> {
                 clickAndSelectOption(pp.sortSelect, option);
                 Thread.sleep(1200);
                 pp.assertSortedPrices(ce.productPrices, false);
+                takeScreenshot("Product sorting > High to Low");
             }
             case optionAtoZ -> {
                 clickAndSelectOption(pp.sortSelect, option);
                 Thread.sleep(1200);
                 pp.assertSortedProductNames(ce.productNames, true);
+                takeScreenshot("Product sorting > A to Z");
             }
             case optionZtoA -> {
                 clickAndSelectOption(pp.sortSelect, option);
                 Thread.sleep(1200);
                 pp.assertSortedProductNames(ce.productNames, false);
+                takeScreenshot("Product sorting > Z to A");
             }
         }
     }

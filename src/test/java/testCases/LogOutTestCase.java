@@ -61,5 +61,6 @@ public class LogOutTestCase extends BasePage {
         waitForElementToBeVisible(lp.swagLabLogo,5);
         softAssert.assertTrue(lp.swagLabLogo.isDisplayed());
         softAssert.assertEquals(getDriver().getCurrentUrl(), getProperty("base_url"));
+        takeScreenshot("Successful Logout Test Case - Screenshot: " + System.currentTimeMillis() + " - " + Thread.currentThread().getName() + " - " + System.getProperty("user.dir") + "\\" + "Screenshots" + "\\" + "LogOutTestCase.png");
     }
 }

@@ -120,6 +120,7 @@ public class CheckoutTestCase extends BasePage {
         clickElement(co.finishButton);
         waitForElementToBeVisible(co.completeHeader,5);
         softAssert.assertEquals(co.completeHeader.getText(), "Thank you for your order!");
+        takeScreenshot("Successful checkout");
     }
 
 }

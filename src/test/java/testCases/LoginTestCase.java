@@ -70,6 +70,7 @@ public class LoginTestCase extends BasePage {
 
         waitForElementToBeVisible(ce.pageTitle,5);
         softAssert.assertTrue(ce.pageTitle.isDisplayed());
+        takeScreenshot("Successful Login Test Case - Username: " + username + " Password: " + password + " - Screenshot: ");
     }
 
 }
